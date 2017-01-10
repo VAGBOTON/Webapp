@@ -36,8 +36,9 @@
 		<div class="col-md-4">
 			<h4>Profile Summary</h4>
 			<hr/>
-			<p>Name: <?php echo $uname; ?></p>
-			<p>Email: <?php echo $uemail; ?></p>
+			<p>Role: <?php echo $urole; ?></p>
+			<p>Nom: <?php echo $uname; ?></p>
+			<p>Adresse Mail: <?php echo $uemail; ?></p>
 			<p>...</p>
 		</div>
 		<div class="col-md-8">
@@ -48,7 +49,7 @@
 		</div>
 	</div>
 </div>
-<script type="text/javascript" src="<?php echo base_url("assets/js/jquery-1.10.2.js"); ?>"></script>
+<script type="text/javascript" src="<?php echo base_url("assets/js/jquery-3.1.1.min.js"); ?>"></script>
 <script type="text/javascript" src="<?php echo base_url("assets/js/bootstrap.js"); ?>"></script>
 </body>
 </html>

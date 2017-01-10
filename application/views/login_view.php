@@ -39,13 +39,13 @@
 			echo form_open("login/index", $attributes);?>
 			<legend>Login</legend>
 			<div class="form-group">
-				<label for="name">Email-ID</label>
-				<input class="form-control" name="email" placeholder="Enter Email-ID" type="text" value="<?php echo set_value('email'); ?>" />
+				<label for="name">Adresse Mail</label>
+				<input class="form-control" name="email" placeholder="Entrer Adresse Mail" type="text" value="<?php echo set_value('email'); ?>" />
 				<span class="text-danger"><?php echo form_error('email'); ?></span>
 			</div>
 			<div class="form-group">
-				<label for="name">Password</label>
-				<input class="form-control" name="password" placeholder="Password" type="password" value="<?php echo set_value('password'); ?>" />
+				<label for="name">Mot de Passe</label>
+				<input class="form-control" name="password" placeholder="Mot de Passe" type="password" value="<?php echo set_value('password'); ?>" />
 				<span class="text-danger"><?php echo form_error('password'); ?></span>
 			</div>
 			<div class="form-group">
@@ -62,7 +62,7 @@
 		</div>
 	</div>
 </div>
-<script type="text/javascript" src="<?php echo base_url("assets/js/jquery-1.10.2.js"); ?>"></script>
+<script type="text/javascript" src="<?php echo base_url("assets/js/jquery-3.1.1.min.js"); ?>"></script>
 <script type="text/javascript" src="<?php echo base_url("assets/js/bootstrap.js"); ?>"></script>
 </body>
 </html>

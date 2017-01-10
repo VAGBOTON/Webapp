@@ -13,8 +13,9 @@ class profile extends CI_Controller
 	function index()
 	{
 		$details = $this->user_model->get_user_by_id($this->session->userdata('uid'));
-		$data['uname'] = $details[0]->fname . " " . $details[0]->lname;
-		$data['uemail'] = $details[0]->email;
+		$data['urole'] = $details[0]->ID_ROLE;
+		$data['uname'] = $details[0]->NOM_PERSONNE;
+		$data['uemail'] = $details[0]->ADRESSEMAIL_PERSONNE;
 		$this->load->view('profile_view', $data);
 	}
 }
