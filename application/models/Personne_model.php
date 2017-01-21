@@ -1,31 +1,31 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class user_model extends CI_Model
+class Personne_model extends CI_Model
 {
-	function __construct()
-    {
-        parent::__construct();
-    }
+	private $table_name = 'personne';
 	
-	function get_user($email, $pwd)
+	function __construct()
+	{
+		parent::__construct();
+	}
+	
+	function login_personne($email, $pwd)
 	{
 		$this->db->where('ADRESSEMAIL_PERSONNE', $email);
 		$this->db->where('MOTDEPASSE_PERSONNE', md5($pwd));
-        $query = $this->db->get('personne');
+		$query = $this->db->get($this->table_name);
 		return $query->result();
 	}
-	
-	// get user
-	function get_user_by_id($id)
+
+	function get_personne_by_id($id)
 	{
 		$this->db->where('ID_PERSONNE', $id);
-        $query = $this->db->get('personne');
+		$query = $this->db->get($this->table_name);
 		return $query->result();
 	}
-	
-	// insert
+
 	function insert_user($data)
-    {
-		return $this->db->insert('personne', $data);
+	{
+		return $this->db->insert($this->table_name, $data);
 	}
 }?>

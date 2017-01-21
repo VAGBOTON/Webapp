@@ -8,26 +8,24 @@ class Signup extends CI_Controller
 		$this->load->helper('security');
 		$this->load->library(array('session', 'form_validation'));
 		$this->load->database();
-		$this->load->model('user_model');
+		$this->load->model('personne_model');
 	}
 	
 	function index()
 	{
-		// set form validation rules
 		$this->form_validation->set_rules('name', 'Nom', 'trim|required|min_length[3]|max_length[30]|xss_clean');
 		$this->form_validation->set_rules('email', 'Adresse Mail', 'trim|required|valid_email|is_unique[PERSONNE.ADRESSEMAIL_PERSONNE]');
 		$this->form_validation->set_rules('password', 'Mot de Passe', 'trim|required|md5');
 		$this->form_validation->set_rules('cpassword', 'Confirmation Mot de Passe', 'trim|required|md5|matches[password]');
 		
-		// submit
 		if ($this->form_validation->run() == FALSE)
         {
-			// fails
-			$this->load->view('signup_view');
+			$this->load->view('templates/header');
+			$this->load->view('home/signup');
+			$this->load->view('templates/footer');
         }
 		else
 		{
-			//insert user details into db
 			$data = array(
 				'NOM_PERSONNE' => $this->input->post('name'),
 				'ID_ROLE' => $this->input->post('role'),
@@ -35,16 +33,15 @@ class Signup extends CI_Controller
 				'MOTDEPASSE_PERSONNE' => $this->input->post('password')
 			);
 			
-			if ($this->user_model->insert_user($data))
+			if ($this->personne_model->insert_user($data))
 			{
 				$this->session->set_flashdata('msg','<div class="alert alert-success text-center">Vous avez bien été enregistré! Veuillez vous connecter sur votre profil!</div>');
-				redirect('signup/index');
+				redirect('signup');
 			}
 			else
 			{
-				// error
 				$this->session->set_flashdata('msg','<div class="alert alert-danger text-center">Oops! Erreur.  Réessayez plus tard!!!</div>');
-				redirect('signup/index');
+				redirect('signup');
 			}
 		}
 	}

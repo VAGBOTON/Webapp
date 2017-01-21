@@ -8,39 +8,36 @@ class Login extends CI_Controller
 		$this->load->helper('security');
 		$this->load->library(array('session', 'form_validation'));
 		$this->load->database();
-		$this->load->model('user_model');
+		$this->load->model('personne_model');
 	}
-    public function index()
-    {
-		// get form input
+	public function index()
+	{
 		$email = $this->input->post("email");
-        $password = $this->input->post("password");
+		$password = $this->input->post("password");
 
-		// form validation
 		$this->form_validation->set_rules("email", "Email", "trim|required|xss_clean");
 		$this->form_validation->set_rules("password", "Password", "trim|required|xss_clean");
 		
 		if ($this->form_validation->run() == FALSE)
-        {
-			// validation fail
-			$this->load->view('login_view');
+		{
+			$this->load->view('templates/header');
+			$this->load->view('home/login');
+			$this->load->view('templates/footer');
 		}
 		else
 		{
-			// check for user credentials
-			$uresult = $this->user_model->get_user($email, $password);
-			if (count($uresult) > 0)
+			$result = $this->personne_model->login_personne($email, $password);
+			if (count($result) > 0)
 			{
-				// set session
-				$sess_data = array('login' => TRUE, 'urole' => $uresult[0]->ID_ROLE,'uname' => $uresult[0]->NOM_PERSONNE, 'uid' => $uresult[0]->ID_PERSONNE);
+				$sess_data = array('login' => TRUE, 'role' => $result[0]->ID_ROLE,'name' => $result[0]->NOM_PERSONNE, 'id' => $result[0]->ID_PERSONNE);
 				$this->session->set_userdata($sess_data);
-				redirect("profile/index");
+				redirect("profile");
 			}
 			else
 			{
 				$this->session->set_flashdata('msg', '<div class="alert alert-danger text-center">Erreur lors de la saisie de l\'Adresse Mail ou du Mot de Passe!</div>');
-				redirect('login/index');
+				redirect('login');
 			}
 		}
-    }
+	}
 }

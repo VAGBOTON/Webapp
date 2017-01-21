@@ -7,15 +7,18 @@ class profile extends CI_Controller
 		$this->load->helper(array('url','html'));
 		$this->load->library('session');
 		$this->load->database();
-		$this->load->model('user_model');
+		$this->load->model('personne_model');
+		
+		if (!$this->session->userdata('login'))
+		{
+			redirect("home");
+		}
 	}
 	
 	function index()
 	{
-		$details = $this->user_model->get_user_by_id($this->session->userdata('uid'));
-		$data['urole'] = $details[0]->ID_ROLE;
-		$data['uname'] = $details[0]->NOM_PERSONNE;
-		$data['uemail'] = $details[0]->ADRESSEMAIL_PERSONNE;
-		$this->load->view('profile_view', $data);
+		$this->load->view('templates/header');
+		$this->load->view('profile/index');
+		$this->load->view('templates/footer');
 	}
 }
