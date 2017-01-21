@@ -14,7 +14,7 @@ class Signup extends CI_Controller
 	function index()
 	{
 		$this->form_validation->set_rules('name', 'Nom', 'trim|required|min_length[3]|max_length[30]|xss_clean');
-		$this->form_validation->set_rules('email', 'Adresse Mail', 'trim|required|valid_email|is_unique[PERSONNE.ADRESSEMAIL_PERSONNE]');
+		$this->form_validation->set_rules('email', 'Adresse Mail', 'trim|required|valid_email|is_unique[personne.ADRESSEMAIL_PERSONNE]');
 		$this->form_validation->set_rules('password', 'Mot de Passe', 'trim|required|md5');
 		$this->form_validation->set_rules('cpassword', 'Confirmation Mot de Passe', 'trim|required|md5|matches[password]');
 		
